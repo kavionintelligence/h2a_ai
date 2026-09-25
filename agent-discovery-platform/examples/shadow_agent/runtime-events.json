@@ -1,0 +1,698 @@
+{
+  "events": [
+    {
+      "event_id": "demo-security-000",
+      "timestamp": "2026-09-24T00:00:00+00:00",
+      "source": "opentelemetry",
+      "service": "security",
+      "namespace": "demo",
+      "deployment": "security",
+      "endpoint": "http://127.0.0.1:8766/security",
+      "event_type": "llm_call",
+      "trace_id": "synthetic-trace-security",
+      "metadata": {
+        "synthetic": true
+      },
+      "model": "synthetic-reasoner"
+    },
+    {
+      "event_id": "demo-security-001",
+      "timestamp": "2026-09-24T00:00:00+00:00",
+      "source": "opentelemetry",
+      "service": "security",
+      "namespace": "demo",
+      "deployment": "security",
+      "endpoint": "http://127.0.0.1:8766/security",
+      "event_type": "planning",
+      "trace_id": "synthetic-trace-security",
+      "metadata": {
+        "synthetic": true
+      }
+    },
+    {
+      "event_id": "demo-security-002",
+      "timestamp": "2026-09-24T00:00:00+00:00",
+      "source": "opentelemetry",
+      "service": "security",
+      "namespace": "demo",
+      "deployment": "security",
+      "endpoint": "http://127.0.0.1:8766/security",
+      "event_type": "tool_call",
+      "trace_id": "synthetic-trace-security",
+      "metadata": {
+        "synthetic": true
+      },
+      "tool": "secret_scanner"
+    },
+    {
+      "event_id": "demo-security-003",
+      "timestamp": "2026-09-24T00:00:00+00:00",
+      "source": "application_audit",
+      "service": "security",
+      "namespace": "demo",
+      "deployment": "security",
+      "endpoint": "http://127.0.0.1:8766/security",
+      "event_type": "tool_call",
+      "trace_id": "synthetic-trace-security",
+      "metadata": {
+        "synthetic": true
+      },
+      "tool": "github.search_code"
+    },
+    {
+      "event_id": "demo-security-004",
+      "timestamp": "2026-09-24T00:00:00+00:00",
+      "source": "application_audit",
+      "service": "security",
+      "namespace": "demo",
+      "deployment": "security",
+      "endpoint": "http://127.0.0.1:8766/security",
+      "event_type": "memory_access",
+      "trace_id": "synthetic-trace-security",
+      "metadata": {
+        "synthetic": true
+      }
+    },
+    {
+      "event_id": "demo-security-005",
+      "timestamp": "2026-09-24T00:00:00+00:00",
+      "source": "opentelemetry",
+      "service": "security",
+      "namespace": "demo",
+      "deployment": "security",
+      "endpoint": "http://127.0.0.1:8766/security",
+      "event_type": "multi_step",
+      "trace_id": "synthetic-trace-security",
+      "metadata": {
+        "synthetic": true
+      }
+    },
+    {
+      "event_id": "demo-security-006",
+      "timestamp": "2026-09-24T00:00:00+00:00",
+      "source": "application_audit",
+      "service": "security",
+      "namespace": "demo",
+      "deployment": "security",
+      "endpoint": "http://127.0.0.1:8766/security",
+      "event_type": "autonomous_action",
+      "trace_id": "synthetic-trace-security",
+      "metadata": {
+        "synthetic": true
+      }
+    },
+    {
+      "event_id": "demo-research-007",
+      "timestamp": "2026-09-24T00:00:00+00:00",
+      "source": "opentelemetry",
+      "service": "research",
+      "namespace": "demo",
+      "deployment": "research",
+      "endpoint": "http://127.0.0.1:8766/research",
+      "event_type": "llm_call",
+      "trace_id": "synthetic-trace-research",
+      "metadata": {
+        "synthetic": true
+      },
+      "model": "synthetic-reasoner"
+    },
+    {
+      "event_id": "demo-research-008",
+      "timestamp": "2026-09-24T00:00:00+00:00",
+      "source": "opentelemetry",
+      "service": "research",
+      "namespace": "demo",
+      "deployment": "research",
+      "endpoint": "http://127.0.0.1:8766/research",
+      "event_type": "planning",
+      "trace_id": "synthetic-trace-research",
+      "metadata": {
+        "synthetic": true
+      }
+    },
+    {
+      "event_id": "demo-research-009",
+      "timestamp": "2026-09-24T00:00:00+00:00",
+      "source": "opentelemetry",
+      "service": "research",
+      "namespace": "demo",
+      "deployment": "research",
+      "endpoint": "http://127.0.0.1:8766/research",
+      "event_type": "tool_call",
+      "trace_id": "synthetic-trace-research",
+      "metadata": {
+        "synthetic": true
+      },
+      "tool": "literature_search"
+    },
+    {
+      "event_id": "demo-research-010",
+      "timestamp": "2026-09-24T00:00:00+00:00",
+      "source": "application_audit",
+      "service": "research",
+      "namespace": "demo",
+      "deployment": "research",
+      "endpoint": "http://127.0.0.1:8766/research",
+      "event_type": "tool_call",
+      "trace_id": "synthetic-trace-research",
+      "metadata": {
+        "synthetic": true
+      },
+      "tool": "paper_analyzer"
+    },
+    {
+      "event_id": "demo-research-011",
+      "timestamp": "2026-09-24T00:00:00+00:00",
+      "source": "application_audit",
+      "service": "research",
+      "namespace": "demo",
+      "deployment": "research",
+      "endpoint": "http://127.0.0.1:8766/research",
+      "event_type": "memory_access",
+      "trace_id": "synthetic-trace-research",
+      "metadata": {
+        "synthetic": true
+      }
+    },
+    {
+      "event_id": "demo-research-012",
+      "timestamp": "2026-09-24T00:00:00+00:00",
+      "source": "opentelemetry",
+      "service": "research",
+      "namespace": "demo",
+      "deployment": "research",
+      "endpoint": "http://127.0.0.1:8766/research",
+      "event_type": "multi_step",
+      "trace_id": "synthetic-trace-research",
+      "metadata": {
+        "synthetic": true
+      }
+    },
+    {
+      "event_id": "demo-research-013",
+      "timestamp": "2026-09-24T00:00:00+00:00",
+      "source": "application_audit",
+      "service": "research",
+      "namespace": "demo",
+      "deployment": "research",
+      "endpoint": "http://127.0.0.1:8766/research",
+      "event_type": "autonomous_action",
+      "trace_id": "synthetic-trace-research",
+      "metadata": {
+        "synthetic": true
+      }
+    },
+    {
+      "event_id": "demo-cv-014",
+      "timestamp": "2026-09-24T00:00:00+00:00",
+      "source": "opentelemetry",
+      "service": "cv",
+      "namespace": "demo",
+      "deployment": "cv",
+      "endpoint": "http://127.0.0.1:8766/cv",
+      "event_type": "llm_call",
+      "trace_id": "synthetic-trace-cv",
+      "metadata": {
+        "synthetic": true
+      },
+      "model": "synthetic-reasoner"
+    },
+    {
+      "event_id": "demo-cv-015",
+      "timestamp": "2026-09-24T00:00:00+00:00",
+      "source": "opentelemetry",
+      "service": "cv",
+      "namespace": "demo",
+      "deployment": "cv",
+      "endpoint": "http://127.0.0.1:8766/cv",
+      "event_type": "planning",
+      "trace_id": "synthetic-trace-cv",
+      "metadata": {
+        "synthetic": true
+      }
+    },
+    {
+      "event_id": "demo-cv-016",
+      "timestamp": "2026-09-24T00:00:00+00:00",
+      "source": "opentelemetry",
+      "service": "cv",
+      "namespace": "demo",
+      "deployment": "cv",
+      "endpoint": "http://127.0.0.1:8766/cv",
+      "event_type": "tool_call",
+      "trace_id": "synthetic-trace-cv",
+      "metadata": {
+        "synthetic": true
+      },
+      "tool": "image_classifier"
+    },
+    {
+      "event_id": "demo-cv-017",
+      "timestamp": "2026-09-24T00:00:00+00:00",
+      "source": "application_audit",
+      "service": "cv",
+      "namespace": "demo",
+      "deployment": "cv",
+      "endpoint": "http://127.0.0.1:8766/cv",
+      "event_type": "tool_call",
+      "trace_id": "synthetic-trace-cv",
+      "metadata": {
+        "synthetic": true
+      },
+      "tool": "object_detector"
+    },
+    {
+      "event_id": "demo-cv-018",
+      "timestamp": "2026-09-24T00:00:00+00:00",
+      "source": "application_audit",
+      "service": "cv",
+      "namespace": "demo",
+      "deployment": "cv",
+      "endpoint": "http://127.0.0.1:8766/cv",
+      "event_type": "memory_access",
+      "trace_id": "synthetic-trace-cv",
+      "metadata": {
+        "synthetic": true
+      }
+    },
+    {
+      "event_id": "demo-cv-019",
+      "timestamp": "2026-09-24T00:00:00+00:00",
+      "source": "opentelemetry",
+      "service": "cv",
+      "namespace": "demo",
+      "deployment": "cv",
+      "endpoint": "http://127.0.0.1:8766/cv",
+      "event_type": "multi_step",
+      "trace_id": "synthetic-trace-cv",
+      "metadata": {
+        "synthetic": true
+      }
+    },
+    {
+      "event_id": "demo-cv-020",
+      "timestamp": "2026-09-24T00:00:00+00:00",
+      "source": "application_audit",
+      "service": "cv",
+      "namespace": "demo",
+      "deployment": "cv",
+      "endpoint": "http://127.0.0.1:8766/cv",
+      "event_type": "autonomous_action",
+      "trace_id": "synthetic-trace-cv",
+      "metadata": {
+        "synthetic": true
+      }
+    },
+    {
+      "event_id": "demo-coordinator-021",
+      "timestamp": "2026-09-24T00:00:00+00:00",
+      "source": "opentelemetry",
+      "service": "coordinator",
+      "namespace": "demo",
+      "deployment": "coordinator",
+      "endpoint": "http://127.0.0.1:8766/coordinator",
+      "event_type": "llm_call",
+      "trace_id": "synthetic-trace-coordinator",
+      "metadata": {
+        "synthetic": true
+      },
+      "model": "synthetic-reasoner"
+    },
+    {
+      "event_id": "demo-coordinator-022",
+      "timestamp": "2026-09-24T00:00:00+00:00",
+      "source": "opentelemetry",
+      "service": "coordinator",
+      "namespace": "demo",
+      "deployment": "coordinator",
+      "endpoint": "http://127.0.0.1:8766/coordinator",
+      "event_type": "planning",
+      "trace_id": "synthetic-trace-coordinator",
+      "metadata": {
+        "synthetic": true
+      }
+    },
+    {
+      "event_id": "demo-coordinator-023",
+      "timestamp": "2026-09-24T00:00:00+00:00",
+      "source": "opentelemetry",
+      "service": "coordinator",
+      "namespace": "demo",
+      "deployment": "coordinator",
+      "endpoint": "http://127.0.0.1:8766/coordinator",
+      "event_type": "tool_call",
+      "trace_id": "synthetic-trace-coordinator",
+      "metadata": {
+        "synthetic": true
+      },
+      "tool": "secret_scanner"
+    },
+    {
+      "event_id": "demo-coordinator-024",
+      "timestamp": "2026-09-24T00:00:00+00:00",
+      "source": "application_audit",
+      "service": "coordinator",
+      "namespace": "demo",
+      "deployment": "coordinator",
+      "endpoint": "http://127.0.0.1:8766/coordinator",
+      "event_type": "tool_call",
+      "trace_id": "synthetic-trace-coordinator",
+      "metadata": {
+        "synthetic": true
+      },
+      "tool": "github.search_code"
+    },
+    {
+      "event_id": "demo-coordinator-025",
+      "timestamp": "2026-09-24T00:00:00+00:00",
+      "source": "application_audit",
+      "service": "coordinator",
+      "namespace": "demo",
+      "deployment": "coordinator",
+      "endpoint": "http://127.0.0.1:8766/coordinator",
+      "event_type": "memory_access",
+      "trace_id": "synthetic-trace-coordinator",
+      "metadata": {
+        "synthetic": true
+      }
+    },
+    {
+      "event_id": "demo-coordinator-026",
+      "timestamp": "2026-09-24T00:00:00+00:00",
+      "source": "opentelemetry",
+      "service": "coordinator",
+      "namespace": "demo",
+      "deployment": "coordinator",
+      "endpoint": "http://127.0.0.1:8766/coordinator",
+      "event_type": "multi_step",
+      "trace_id": "synthetic-trace-coordinator",
+      "metadata": {
+        "synthetic": true
+      }
+    },
+    {
+      "event_id": "demo-coordinator-027",
+      "timestamp": "2026-09-24T00:00:00+00:00",
+      "source": "application_audit",
+      "service": "coordinator",
+      "namespace": "demo",
+      "deployment": "coordinator",
+      "endpoint": "http://127.0.0.1:8766/coordinator",
+      "event_type": "autonomous_action",
+      "trace_id": "synthetic-trace-coordinator",
+      "metadata": {
+        "synthetic": true
+      }
+    },
+    {
+      "event_id": "demo-child-028",
+      "timestamp": "2026-09-24T00:00:00+00:00",
+      "source": "opentelemetry",
+      "service": "child",
+      "namespace": "demo",
+      "deployment": "child",
+      "endpoint": "http://127.0.0.1:8766/child",
+      "event_type": "llm_call",
+      "trace_id": "synthetic-trace-child",
+      "metadata": {
+        "synthetic": true
+      },
+      "model": "synthetic-reasoner"
+    },
+    {
+      "event_id": "demo-child-029",
+      "timestamp": "2026-09-24T00:00:00+00:00",
+      "source": "opentelemetry",
+      "service": "child",
+      "namespace": "demo",
+      "deployment": "child",
+      "endpoint": "http://127.0.0.1:8766/child",
+      "event_type": "planning",
+      "trace_id": "synthetic-trace-child",
+      "metadata": {
+        "synthetic": true
+      }
+    },
+    {
+      "event_id": "demo-child-030",
+      "timestamp": "2026-09-24T00:00:00+00:00",
+      "source": "opentelemetry",
+      "service": "child",
+      "namespace": "demo",
+      "deployment": "child",
+      "endpoint": "http://127.0.0.1:8766/child",
+      "event_type": "tool_call",
+      "trace_id": "synthetic-trace-child",
+      "metadata": {
+        "synthetic": true
+      },
+      "tool": "secret_scanner"
+    },
+    {
+      "event_id": "demo-child-031",
+      "timestamp": "2026-09-24T00:00:00+00:00",
+      "source": "application_audit",
+      "service": "child",
+      "namespace": "demo",
+      "deployment": "child",
+      "endpoint": "http://127.0.0.1:8766/child",
+      "event_type": "tool_call",
+      "trace_id": "synthetic-trace-child",
+      "metadata": {
+        "synthetic": true
+      },
+      "tool": "github.search_code"
+    },
+    {
+      "event_id": "demo-child-032",
+      "timestamp": "2026-09-24T00:00:00+00:00",
+      "source": "application_audit",
+      "service": "child",
+      "namespace": "demo",
+      "deployment": "child",
+      "endpoint": "http://127.0.0.1:8766/child",
+      "event_type": "memory_access",
+      "trace_id": "synthetic-trace-child",
+      "metadata": {
+        "synthetic": true
+      }
+    },
+    {
+      "event_id": "demo-child-033",
+      "timestamp": "2026-09-24T00:00:00+00:00",
+      "source": "opentelemetry",
+      "service": "child",
+      "namespace": "demo",
+      "deployment": "child",
+      "endpoint": "http://127.0.0.1:8766/child",
+      "event_type": "multi_step",
+      "trace_id": "synthetic-trace-child",
+      "metadata": {
+        "synthetic": true
+      }
+    },
+    {
+      "event_id": "demo-child-034",
+      "timestamp": "2026-09-24T00:00:00+00:00",
+      "source": "application_audit",
+      "service": "child",
+      "namespace": "demo",
+      "deployment": "child",
+      "endpoint": "http://127.0.0.1:8766/child",
+      "event_type": "autonomous_action",
+      "trace_id": "synthetic-trace-child",
+      "metadata": {
+        "synthetic": true
+      }
+    },
+    {
+      "event_id": "demo-shadow-035",
+      "timestamp": "2026-09-24T00:00:00+00:00",
+      "source": "opentelemetry",
+      "service": "shadow",
+      "namespace": "demo",
+      "deployment": "shadow",
+      "endpoint": "http://127.0.0.1:8766/shadow",
+      "event_type": "llm_call",
+      "trace_id": "synthetic-trace-shadow",
+      "metadata": {
+        "synthetic": true
+      },
+      "model": "synthetic-reasoner"
+    },
+    {
+      "event_id": "demo-shadow-036",
+      "timestamp": "2026-09-24T00:00:00+00:00",
+      "source": "opentelemetry",
+      "service": "shadow",
+      "namespace": "demo",
+      "deployment": "shadow",
+      "endpoint": "http://127.0.0.1:8766/shadow",
+      "event_type": "planning",
+      "trace_id": "synthetic-trace-shadow",
+      "metadata": {
+        "synthetic": true
+      }
+    },
+    {
+      "event_id": "demo-shadow-037",
+      "timestamp": "2026-09-24T00:00:00+00:00",
+      "source": "opentelemetry",
+      "service": "shadow",
+      "namespace": "demo",
+      "deployment": "shadow",
+      "endpoint": "http://127.0.0.1:8766/shadow",
+      "event_type": "tool_call",
+      "trace_id": "synthetic-trace-shadow",
+      "metadata": {
+        "synthetic": true
+      },
+      "tool": "secret_scanner"
+    },
+    {
+      "event_id": "demo-shadow-038",
+      "timestamp": "2026-09-24T00:00:00+00:00",
+      "source": "application_audit",
+      "service": "shadow",
+      "namespace": "demo",
+      "deployment": "shadow",
+      "endpoint": "http://127.0.0.1:8766/shadow",
+      "event_type": "tool_call",
+      "trace_id": "synthetic-trace-shadow",
+      "metadata": {
+        "synthetic": true
+      },
+      "tool": "github.search_code"
+    },
+    {
+      "event_id": "demo-shadow-039",
+      "timestamp": "2026-09-24T00:00:00+00:00",
+      "source": "application_audit",
+      "service": "shadow",
+      "namespace": "demo",
+      "deployment": "shadow",
+      "endpoint": "http://127.0.0.1:8766/shadow",
+      "event_type": "memory_access",
+      "trace_id": "synthetic-trace-shadow",
+      "metadata": {
+        "synthetic": true
+      }
+    },
+    {
+      "event_id": "demo-shadow-040",
+      "timestamp": "2026-09-24T00:00:00+00:00",
+      "source": "opentelemetry",
+      "service": "shadow",
+      "namespace": "demo",
+      "deployment": "shadow",
+      "endpoint": "http://127.0.0.1:8766/shadow",
+      "event_type": "multi_step",
+      "trace_id": "synthetic-trace-shadow",
+      "metadata": {
+        "synthetic": true
+      }
+    },
+    {
+      "event_id": "demo-shadow-041",
+      "timestamp": "2026-09-24T00:00:00+00:00",
+      "source": "application_audit",
+      "service": "shadow",
+      "namespace": "demo",
+      "deployment": "shadow",
+      "endpoint": "http://127.0.0.1:8766/shadow",
+      "event_type": "autonomous_action",
+      "trace_id": "synthetic-trace-shadow",
+      "metadata": {
+        "synthetic": true
+      }
+    },
+    {
+      "event_id": "demo-coordinator-042",
+      "timestamp": "2026-09-24T00:00:00+00:00",
+      "source": "opentelemetry",
+      "service": "coordinator",
+      "namespace": "demo",
+      "deployment": "coordinator",
+      "endpoint": "http://127.0.0.1:8766/coordinator",
+      "event_type": "delegation",
+      "trace_id": "synthetic-trace-coordinator",
+      "metadata": {
+        "synthetic": true
+      },
+      "target": "child"
+    },
+    {
+      "event_id": "demo-coordinator-043",
+      "timestamp": "2026-09-24T00:00:00+00:00",
+      "source": "opentelemetry",
+      "service": "coordinator",
+      "namespace": "demo",
+      "deployment": "coordinator",
+      "endpoint": "http://127.0.0.1:8766/coordinator",
+      "event_type": "agent_call",
+      "trace_id": "synthetic-trace-coordinator",
+      "metadata": {
+        "synthetic": true
+      },
+      "target": "child"
+    },
+    {
+      "event_id": "demo-normal-api-044",
+      "timestamp": "2026-09-24T00:00:00+00:00",
+      "source": "opentelemetry",
+      "service": "normal-api",
+      "namespace": "demo",
+      "deployment": "normal-api",
+      "endpoint": "http://127.0.0.1:8766/normal-api",
+      "event_type": "external_api_call",
+      "trace_id": "synthetic-trace-normal-api",
+      "metadata": {
+        "synthetic": true
+      }
+    },
+    {
+      "event_id": "demo-llm-wrapper-045",
+      "timestamp": "2026-09-24T00:00:00+00:00",
+      "source": "opentelemetry",
+      "service": "llm-wrapper",
+      "namespace": "demo",
+      "deployment": "llm-wrapper",
+      "endpoint": "http://127.0.0.1:8766/llm-wrapper",
+      "event_type": "llm_call",
+      "trace_id": "synthetic-trace-llm-wrapper",
+      "metadata": {
+        "synthetic": true
+      },
+      "model": "synthetic-text-model"
+    },
+    {
+      "event_id": "demo-workflow-046",
+      "timestamp": "2026-09-24T00:00:00+00:00",
+      "source": "opentelemetry",
+      "service": "workflow",
+      "namespace": "demo",
+      "deployment": "workflow",
+      "endpoint": "http://127.0.0.1:8766/workflow",
+      "event_type": "tool_call",
+      "trace_id": "synthetic-trace-workflow",
+      "metadata": {
+        "synthetic": true
+      },
+      "tool": "format_document"
+    },
+    {
+      "event_id": "demo-workflow-047",
+      "timestamp": "2026-09-24T00:00:00+00:00",
+      "source": "opentelemetry",
+      "service": "workflow",
+      "namespace": "demo",
+      "deployment": "workflow",
+      "endpoint": "http://127.0.0.1:8766/workflow",
+      "event_type": "multi_step",
+      "trace_id": "synthetic-trace-workflow",
+      "metadata": {
+        "synthetic": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+[
+  {
+    "repo": "claw-orchestrator-main",
+    "source": "src/kernel/exec.ts",
+    "destination": "claw-orchestrator/exec.ts",
+    "sha256": "12a1cd97fa1fd115a319cf1e77e935bdfff51e39baf3f6d549a7e01e3c3bb20c",
+    "local_sha256": "46e4df07d40d3f817b36db44d44b3ac7cf7443f927c388c838b379f82ea7a73d",
+    "locally_adapted": true
+  },
+  {
+    "repo": "claw-orchestrator-main",
+    "source": "LICENSE",
+    "destination": "claw-orchestrator/LICENSE",
+    "sha256": "1fca2e535455f2a9ce4433d99fbcfec2cc06c6f0a9287662654d2ee3102933e7",
+    "local_sha256": "1fca2e535455f2a9ce4433d99fbcfec2cc06c6f0a9287662654d2ee3102933e7",
+    "locally_adapted": false
+  },
+  {
+    "repo": "shadow-ai-guard-main",
+    "source": "registry/registry.yaml",
+    "destination": "shadow-ai-guard/registry.yaml",
+    "sha256": "94bb061fa84025e8f08d7cc4f141d3b3b2a073ddb06d65285ecaef5471150fa9",
+    "local_sha256": "94bb061fa84025e8f08d7cc4f141d3b3b2a073ddb06d65285ecaef5471150fa9",
+    "locally_adapted": false
+  },
+  {
+    "repo": "shadow-ai-guard-main",
+    "source": "LICENSE",
+    "destination": "shadow-ai-guard/LICENSE",
+    "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "local_sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "locally_adapted": false
+  },
+  {
+    "repo": "shadow-ai-guard-main",
+    "source": "NOTICE",
+    "destination": "shadow-ai-guard/NOTICE",
+    "sha256": "8be53bbe9c6257b87b90fba953a4a8201c2ac7d35bed1d1d32172d09c732c45f",
+    "local_sha256": "8be53bbe9c6257b87b90fba953a4a8201c2ac7d35bed1d1d32172d09c732c45f",
+    "locally_adapted": false
+  },
+  {
+    "repo": "Claw-Hunter-main",
+    "source": "claw-hunter.ps1",
+    "destination": "claw-hunter/claw-hunter.ps1",
+    "sha256": "608ba8ca63c1eb00c678214e20932552471a955dad5a9330d6582d46f2f5a22a",
+    "local_sha256": "608ba8ca63c1eb00c678214e20932552471a955dad5a9330d6582d46f2f5a22a",
+    "locally_adapted": false
+  },
+  {
+    "repo": "Claw-Hunter-main",
+    "source": "claw-hunter.sh",
+    "destination": "claw-hunter/claw-hunter.sh",
+    "sha256": "cd3fe5a4e8ffcba710a4eafdbdf0cd9d238ed218cb4bd576d8d1a68d624034a0",
+    "local_sha256": "cd3fe5a4e8ffcba710a4eafdbdf0cd9d238ed218cb4bd576d8d1a68d624034a0",
+    "locally_adapted": false
+  },
+  {
+    "repo": "Claw-Hunter-main",
+    "source": "LICENSE",
+    "destination": "claw-hunter/LICENSE",
+    "sha256": "76c8684034cc7a83f7ba25cd88cd7e0c26e31d5245e1da1872b036cd93e67233",
+    "local_sha256": "76c8684034cc7a83f7ba25cd88cd7e0c26e31d5245e1da1872b036cd93e67233",
+    "locally_adapted": false
+  }
+]

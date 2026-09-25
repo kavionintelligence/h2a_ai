@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "scenarioId": "hp-cto-ciso-executive-demonstration",
+  "title": "Human-bound multi-agent enterprise review",
+  "audience": ["HP CTO", "HP CISO"],
+  "runtimeBoundary": "local scripted-workplace",
+  "liveProviderClaim": false,
+  "stages": [
+    { "id": "human-proof", "surface": "Human Proof", "proof": ["BIOMETRIC_ENROLLED", "HUMAN_PROOF_ATTEMPTED", "HUMAN_VERIFIED"] },
+    { "id": "agent-team", "surface": "Command Floor", "providers": ["scripted", "openai-codex", "claude-code", "gemini-antigravity"], "proof": ["AGENT_BOUND", "AGENT_RUNTIME_BOUND"] },
+    { "id": "authority", "surface": "Mandates", "proof": ["MANDATE_CREATED", "MANDATE_SIGNED", "DELEGATION_CREATED"] },
+    { "id": "successful-collaboration", "surface": "Command Floor", "outcome": "normal", "proof": ["SCENARIO_STARTED", "POLICY_ALLOWED", "CONTEXT_DISCLOSED", "ACTION_EXECUTED", "WORKFLOW_COMPLETED"] },
+    { "id": "least-privilege-denial", "surface": "Command Floor", "outcome": "denied", "proof": ["POLICY_DENIED"] },
+    { "id": "human-oversight", "surface": "Mandates", "outcome": "approval", "proof": ["HUMAN_APPROVAL_REQUIRED", "HUMAN_APPROVED"] },
+    { "id": "containment", "surface": "Mandates", "outcome": "revocation", "proof": ["MANDATE_REVOKED", "POLICY_DENIED"] },
+    { "id": "investigation", "surface": "Evidence", "proof": ["hash-chain-verification", "identity-chain-resolution", "audit-bundle-export"] }
+  ],
+  "nonClaims": [
+    "No live OpenAI, Anthropic, Google, or AWS model execution is represented.",
+    "Local hash chaining is tamper evidence, not external notarization.",
+    "The MVP is not a compliance certification or production biometric approval."
+  ]
+}

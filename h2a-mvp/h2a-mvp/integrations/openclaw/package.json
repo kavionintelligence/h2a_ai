@@ -1,0 +1,13 @@
+{
+  "name": "h2a-openclaw-policy-plugin",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "license": "UNLICENSED",
+  "peerDependencies": {
+    "openclaw": ">=2026.5.17"
+  },
+  "openclaw": {
+    "extensions": ["./index.ts"]
+  }
+}

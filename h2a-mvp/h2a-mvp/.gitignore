@@ -1,0 +1,15 @@
+node_modules/
+out/
+dist/
+.vite/
+coverage/
+playwright-report/
+test-results/
+__pycache__/
+*.py[cod]
+*.log
+data/h2a-demo/settings/provider-secrets.json
+data/h2a-demo/biometrics/
+data/h2a-demo/biometric-secrets/
+data/h2a-demo/settings/h2a-signing-key.json
+data/h2a-demo/passports/workload-keys.json

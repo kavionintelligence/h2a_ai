@@ -1,0 +1,41 @@
+{
+  "manifestVersion": 1,
+  "usePolicy": "local-non-commercial-demonstration-only",
+  "assets": [
+    {
+      "id": "mediapipe-face-landmarker",
+      "path": "public/biometric/models/face_landmarker.task",
+      "sha256": "64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff"
+    },
+    {
+      "id": "insightface-w600k-mbf",
+      "path": "public/biometric/models/face.onnx",
+      "sha256": "9cc6e4a75f0e2bf0b1aed94578f144d15175f357bdc05e815e5c4a02b319eb4f"
+    },
+    {
+      "id": "antispoofing-ep50",
+      "path": "public/biometric/models/antispoofing_ep50.onnx",
+      "sha256": "f292ae67adea39ed9fad05773f1993a51a5b8c833cfbcea7646e03ce78377f95"
+    },
+    {
+      "id": "bch-codec-wasm",
+      "path": "assets/biometric/bch_codec.wasm",
+      "sha256": "bed6a46aa299e8b3bc4ef8694155cb890ee50b91b42fde670062485aea00ca7a"
+    },
+    {
+      "id": "bch-codec-loader",
+      "path": "assets/biometric/bch_codec.cjs",
+      "sha256": "8399dfd786bd2cf726a96be632f27e42a290010a05b070a1d379a11647d66acb"
+    },
+    {
+      "id": "onnx-runtime-jsep-loader",
+      "path": "public/biometric/ort/ort-wasm-simd-threaded.jsep.mjs",
+      "sha256": "9a99acd12acc495184c9ea4d458ac9424f8180aacfbc7b8371ed64f9351e4a81"
+    },
+    {
+      "id": "onnx-runtime-jsep-wasm",
+      "path": "public/biometric/ort/ort-wasm-simd-threaded.jsep.wasm",
+      "sha256": "2e0a3d0e3f6b7c13ecfaba38c13691fd19c9ed470e72f9d7d8416ca59ab6dbcd"
+    }
+  ]
+}

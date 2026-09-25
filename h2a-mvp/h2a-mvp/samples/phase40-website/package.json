@@ -1,0 +1,12 @@
+{
+  "name": "h2a-phase40-website",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "lint": "node scripts/validate.mjs lint",
+    "typecheck": "node scripts/validate.mjs typecheck",
+    "test": "node scripts/validate.mjs test",
+    "build": "node scripts/validate.mjs build"
+  }
+}

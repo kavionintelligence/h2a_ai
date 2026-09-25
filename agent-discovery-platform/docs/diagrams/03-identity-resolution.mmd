@@ -1,0 +1,11 @@
+flowchart TB
+  Observation[New observation] --> Conflict{Conflicting strong identity?}
+  Conflict -->|Yes| Separate["Separate record; retain conflict"]
+  Conflict -->|No| Signals["Compare normalized endpoint, source ID, registration ID, infrastructure composite"]
+  Signals --> Match{Supported strong match?}
+  Match -->|No| New[Create new canonical ID]
+  Match -->|Yes| Merge[Merge into existing canonical ID]
+  New --> Explain["Store decision, evidence, and timestamps"]
+  Merge --> Explain
+  Separate --> Explain
+  Example["Security Agent card + Kubernetes endpoint + runtime endpoint"] --> Signals

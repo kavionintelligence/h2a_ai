@@ -1,0 +1,47 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "allowImportingTsExtensions": true,
+    "jsx": "react-jsx",
+    "strict": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "types": ["node"],
+    "baseUrl": ".",
+    "paths": {
+      "@h2a/contracts": ["packages/contracts/src/index.ts"],
+      "@h2a/storage": ["packages/storage/src/index.ts"],
+      "@h2a/evidence": ["packages/evidence/src/index.ts"],
+      "@h2a/biometrics": ["packages/biometrics/src/index.ts"],
+      "@h2a/identity": ["packages/identity/src/index.ts"],
+      "@h2a/organization": ["packages/organization/src/index.ts"],
+      "@h2a/mandates": ["packages/mandates/src/index.ts"],
+      "@h2a/agents": ["packages/agents/src/index.ts"],
+      "@h2a/resources": ["packages/resources/src/index.ts"],
+      "@h2a/connectors": ["packages/connectors/src/index.ts"],
+      "@h2a/messaging": ["packages/messaging/src/index.ts"],
+      "@h2a/federation": ["packages/federation/src/index.ts"],
+      "@h2a/ceremony": ["packages/ceremony/src/index.ts"],
+      "@h2a/bootstrap": ["packages/bootstrap/src/index.ts"],
+      "@h2a/control-plane": ["packages/control-plane/src/index.ts"],
+      "@h2a/office": ["packages/office/src/index.ts"],
+      "@h2a/operator-experience": ["packages/operator-experience/src/index.ts"],
+      "@h2a/projects": ["packages/projects/src/index.ts"],
+      "@h2a/sdk-typescript": ["packages/sdk-typescript/src/index.ts"],
+      "@h2a/ui": ["packages/ui/src/index.ts"]
+    }
+  },
+  "include": [
+    "apps/governance/**/*.ts",
+    "apps/desktop/main/**/*.ts",
+    "apps/desktop/preload/**/*.ts",
+    "packages/**/*.ts",
+    "packages/**/*.tsx",
+    "tests/**/*.ts",
+    "electron.vite.config.ts",
+    "vite.web.config.ts",
+    "vitest.config.ts"
+  ]
+}

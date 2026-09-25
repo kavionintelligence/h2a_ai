@@ -1,0 +1,9 @@
+flowchart TB
+  Events["Recent runtime events from authorized collectors"] --> Fingerprint["Model + tools + planning/action + multi-step/memory/delegation"]
+  Fingerprint --> Enough{Combined agent behavior?}
+  Enough -->|No| Uncertain["Non-agent or uncertain; retain evidence"]
+  Enough -->|Yes| Registration{Operator registration exists?}
+  Registration -->|Yes| Registered[Registered agent candidate]
+  Registration -->|No| Shadow["Shadow candidate: review recommended"]
+  Shadow --> Evidence["Explain behavioral signals, sources, capabilities, and score"]
+  Evidence --> Review["Human review; no automatic trust approval"]

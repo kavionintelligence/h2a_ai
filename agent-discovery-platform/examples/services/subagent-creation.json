@@ -1,0 +1,20 @@
+{
+  "sources": {
+    "api_registry": [
+      {
+        "entries": [
+          {
+            "id": "dynamic-child-instance",
+            "name": "Dynamic Review Subagent",
+            "endpoint": "http://127.0.0.1:8766/child",
+            "service": "child",
+            "namespace": "demo",
+            "deployment": "child",
+            "entity_hint": "dynamic_sub_agent",
+            "description": "Synthetic creation inventory for a transient delegated worker; subtype is declared."
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "sources": {
+    "a2a": [
+      {
+        "url": "http://127.0.0.1:8766/security/.well-known/agent-card.json"
+      },
+      {
+        "url": "http://127.0.0.1:8766/research/.well-known/agent-card.json"
+      },
+      {
+        "url": "http://127.0.0.1:8766/cv/.well-known/agent-card.json"
+      },
+      {
+        "url": "http://127.0.0.1:8766/coordinator/.well-known/agent-card.json"
+      }
+    ],
+    "mcp": [
+      {
+        "url": "http://127.0.0.1:8766/mcp"
+      }
+    ],
+    "kubernetes": [
+      {
+        "items": [
+          {
+            "apiVersion": "apps/v1",
+            "kind": "Deployment",
+            "metadata": {
+              "name": "security",
+              "namespace": "demo",
+              "labels": {
+                "app.kubernetes.io/name": "security"
+              },
+              "annotations": {
+                "agent-census.io/name": "Security Agent Kubernetes View",
+                "agent-census.io/endpoint": "http://127.0.0.1:8766/security",
+                "agent-census.io/protocol": "a2a",
+                "agent-census.io/owner": "Synthetic Demo Team"
+              }
+            },
+            "spec": {
+              "template": {
+                "spec": {
+                  "serviceAccountName": "security-agent"
+                }
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "api_registry": [
+      {
+        "entries": [
+          {
+            "id": "normal-api",
+            "name": "Normal API Service",
+            "endpoint": "http://127.0.0.1:8766/normal-api",
+            "service": "normal-api",
+            "namespace": "demo",
+            "protocols": [
+              "http"
+            ],
+            "entity_hint": "api"
+          },
+          {
+            "id": "llm-wrapper",
+            "name": "LLM Wrapper",
+            "endpoint": "http://127.0.0.1:8766/llm-wrapper",
+            "service": "llm-wrapper",
+            "namespace": "demo",
+            "protocols": [
+              "http"
+            ],
+            "entity_hint": "llm_wrapper"
+          },
+          {
+            "id": "workflow",
+            "name": "Fixed Workflow",
+            "endpoint": "http://127.0.0.1:8766/workflow",
+            "service": "workflow",
+            "namespace": "demo",
+            "protocols": [
+              "http"
+            ],
+            "entity_hint": "workflow"
+          }
+        ]
+      }
+    ]
+  }
+}

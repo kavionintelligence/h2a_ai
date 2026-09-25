@@ -1,0 +1,108 @@
+[
+  {
+    "candidate_id": "operator-security",
+    "name": "Security Agent",
+    "source": "manual",
+    "endpoint": "http://127.0.0.1:8766/security",
+    "skills": [
+      "code_security",
+      "secret_detection",
+      "repository_analysis"
+    ],
+    "tools": [
+      "secret_scanner",
+      "github.search_code"
+    ],
+    "protocols": [
+      "a2a"
+    ],
+    "service": "security",
+    "namespace": "demo",
+    "deployment": "security",
+    "owner": "Synthetic Demo Team",
+    "environment": "offline-demo",
+    "entity_hint": "autonomous_agent",
+    "description": "Synthetic agent fixture; no real analysis is performed.",
+    "metadata": {
+      "synthetic": true
+    }
+  },
+  {
+    "candidate_id": "operator-research",
+    "name": "Research Agent",
+    "source": "manual",
+    "endpoint": "http://127.0.0.1:8766/research",
+    "skills": [
+      "literature_search",
+      "paper_analysis"
+    ],
+    "tools": [
+      "paper_search",
+      "paper_reader"
+    ],
+    "protocols": [
+      "a2a"
+    ],
+    "service": "research",
+    "namespace": "demo",
+    "deployment": "research",
+    "owner": "Synthetic Demo Team",
+    "environment": "offline-demo",
+    "entity_hint": "autonomous_agent",
+    "description": "Synthetic agent fixture; no real analysis is performed.",
+    "metadata": {
+      "synthetic": true
+    }
+  },
+  {
+    "candidate_id": "operator-cv",
+    "name": "CV Agent",
+    "source": "manual",
+    "endpoint": "http://127.0.0.1:8766/cv",
+    "skills": [
+      "object_detection",
+      "image_classification"
+    ],
+    "tools": [
+      "image_classifier"
+    ],
+    "protocols": [
+      "a2a"
+    ],
+    "service": "cv",
+    "namespace": "demo",
+    "deployment": "cv",
+    "owner": "Synthetic Demo Team",
+    "environment": "offline-demo",
+    "entity_hint": "autonomous_agent",
+    "description": "Synthetic agent fixture; no real analysis is performed.",
+    "metadata": {
+      "synthetic": true
+    }
+  },
+  {
+    "candidate_id": "operator-coordinator",
+    "name": "Coordinator Agent",
+    "source": "manual",
+    "endpoint": "http://127.0.0.1:8766/coordinator",
+    "skills": [
+      "repository_analysis"
+    ],
+    "tools": [
+      "github.search_code"
+    ],
+    "protocols": [
+      "a2a"
+    ],
+    "service": "coordinator",
+    "namespace": "demo",
+    "deployment": "coordinator",
+    "owner": "Synthetic Demo Team",
+    "environment": "offline-demo",
+    "entity_hint": "multi_agent_system",
+    "description": "Synthetic agent fixture; no real analysis is performed.",
+    "metadata": {
+      "synthetic": true
+    }
+  }
+]

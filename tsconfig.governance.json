@@ -1,0 +1,5 @@
+{
+  "extends": "./h2a-mvp/h2a-mvp/tsconfig.node.json",
+  "compilerOptions": { "jsx": "react-jsx", "lib": ["ES2022", "DOM", "DOM.Iterable"], "typeRoots": ["./h2a-mvp/h2a-mvp/node_modules/@types"], "types": ["node", "react", "react-dom"] },
+  "include": ["h2a-mvp/h2a-mvp/apps/governance/**/*.ts", "h2a-mvp/h2a-mvp/apps/web/src/ByoSyncApp.tsx"]
+}

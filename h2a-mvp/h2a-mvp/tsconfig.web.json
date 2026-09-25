@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "useDefineForClassFields": true,
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "allowJs": false,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["apps/web/src/*"],
+      "@h2a/contracts": ["packages/contracts/src/index.ts"],
+      "@h2a/operator-experience": ["packages/operator-experience/src/index.ts"],
+      "@h2a/provider-catalogue": ["packages/agents/src/providerRegistry.ts"],
+      "@h2a/ui": ["packages/ui/src/index.ts"]
+    }
+  },
+  "include": [
+    "apps/web/src/**/*.ts",
+    "apps/web/src/**/*.tsx",
+    "apps/web/src/**/*.d.ts",
+    "apps/desktop/renderer/src/**/*.ts",
+    "apps/desktop/renderer/src/**/*.tsx",
+    "apps/desktop/renderer/src/**/*.d.ts",
+    "packages/contracts/src/**/*.ts",
+    "packages/operator-experience/src/**/*.ts",
+    "packages/ui/src/**/*.ts",
+    "packages/ui/src/**/*.tsx"
+  ]
+}

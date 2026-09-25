@@ -1,0 +1,14 @@
+flowchart TB
+  Request[Task request] --> Match[Select eligible match or explicit agent]
+  Match --> Check["Recheck trust, health, freshness, capability, and endpoint policy"]
+  Check --> Protocol{Supported advertised protocol?}
+  Protocol -->|A2A 0.3 JSON-RPC| A2A[message/send]
+  Protocol -->|HTTP| HTTP[Direct JSON POST]
+  Protocol -->|MCP JSON profile| MCP["Initialize → verify tool → tools/call"]
+  Protocol -->|Local| Local[Trusted registered callable]
+  Protocol -->|No| Error[Structured execution error]
+  A2A --> Result[Validate and return result]
+  HTTP --> Result
+  MCP --> Result
+  Local --> Result
+  Result --> Audit[Audit and subsequent runtime observation]

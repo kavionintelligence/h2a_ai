@@ -1,0 +1,30 @@
+sequenceDiagram
+  participant User as Demo command
+  participant Mock as Loopback mock platform
+  participant API as Registry API
+  participant Pipeline as Discovery and evidence pipeline
+  participant DB as SQLite registry and graph
+  User->>Mock: Start synthetic peers on a free port
+  User->>API: Register Security, Research, CV, Coordinator
+  API->>DB: Save operator registrations
+  User->>API: Run A2A, MCP, Kubernetes, API discovery
+  API->>Mock: Read cards; initialize MCP and list tools
+  Mock-->>API: Declared metadata
+  API->>Pipeline: Normalize, fingerprint, classify, deduplicate
+  Pipeline->>DB: Persist evidence and capabilities
+  User->>API: Ingest synthetic behavior and delegation
+  API->>Pipeline: Evaluate combined behavior
+  Pipeline->>DB: Refresh agents; identify shadow service and child
+  User->>API: Import explicit transient-child creation metadata
+  API->>DB: Explain child subtype; preserve unregistered state
+  User->>API: Approve known agents; scan health
+  API->>Mock: Explicit health requests
+  User->>API: Search and match code-security task
+  API-->>User: Eligible agents and reasons
+  User->>API: Route synthetic task via A2A
+  API->>Mock: message/send
+  Mock-->>API: Explicitly synthetic result
+  API-->>User: Result and selected protocol
+  User->>API: Fetch records, graph, and shadow report
+  API-->>User: Full evidence
+  User->>User: Compute measured metrics; write JSON and Markdown

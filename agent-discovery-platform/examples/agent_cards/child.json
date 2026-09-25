@@ -1,0 +1,32 @@
+{
+  "protocolVersion": "0.3.0",
+  "name": "Dynamic Review Subagent",
+  "description": "Synthetic offline agent; no real analysis is performed.",
+  "url": "http://127.0.0.1:8766/child",
+  "version": "1.0.0",
+  "provider": {
+    "organization": "Synthetic Demo",
+    "url": "https://example.invalid"
+  },
+  "preferredTransport": "JSONRPC",
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false
+  },
+  "defaultInputModes": [
+    "text/plain"
+  ],
+  "defaultOutputModes": [
+    "text/plain"
+  ],
+  "skills": [
+    {
+      "id": "code_security",
+      "name": "code_security",
+      "description": "Synthetic code_security",
+      "tags": [
+        "code_security"
+      ]
+    }
+  ]
+}

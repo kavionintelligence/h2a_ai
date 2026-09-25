@@ -1,0 +1,19 @@
+flowchart LR
+  Request["Explicit URLs or supplied inventories"] --> Adapters{Independent adapters}
+  Adapters --> A2A["Validate Agent Card"]
+  Adapters --> MCP["Initialize and list tools"]
+  Adapters --> Infra["Import infrastructure metadata"]
+  Adapters --> Registry["Import registry or manifest"]
+  A2A --> Valid{Valid item?}
+  MCP --> Valid
+  Infra --> Valid
+  Registry --> Valid
+  Valid -->|No| Error["Bounded item error; continue other sources"]
+  Valid -->|Yes| Candidate["Normalized Candidate + Evidence"]
+  Candidate --> Fingerprint[Fingerprint]
+  Fingerprint --> Classification[Classification]
+  Classification --> Identity[Identity resolution]
+  Identity --> Capabilities[Capability inference]
+  Capabilities --> Catalog["Registry and graph update"]
+  Error --> Response["Partial result: agents + errors"]
+  Catalog --> Response

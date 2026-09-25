@@ -1,0 +1,11 @@
+packages:
+  - apps/*
+  - packages/*
+allowBuilds:
+  electron: true
+  esbuild: true
+  node-pty: true
+  protobufjs: true
+minimumReleaseAgeExclude:
+  - lucide-react@1.33.0
+  - pixi.js@8.20.1

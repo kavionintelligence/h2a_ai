@@ -1,0 +1,10 @@
+flowchart LR
+  Task[Task text or explicit capabilities] --> Analyze[Deterministic task analysis]
+  Analyze --> Required[Required capability names]
+  Required --> Index[Catalog capability lookup]
+  Index --> Evidence[Declared / observed / inferred evidence]
+  Evidence --> Guards{Approved, healthy, fresh?}
+  Guards -->|No| Excluded[Explain exclusion]
+  Guards -->|Yes| Rank[Rank by evidence support]
+  Rank --> Matches["Candidate agents and match reasons"]
+  Required -->|Unknown task| Empty["No match; request explicit capability"]

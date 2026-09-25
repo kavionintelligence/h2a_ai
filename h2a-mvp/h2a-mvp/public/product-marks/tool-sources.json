@@ -1,0 +1,32 @@
+[
+  {
+    "file": "github.ico",
+    "source": "https://github.com/favicon.ico",
+    "label": "GitHub",
+    "sha256": "2ee43237d196100210f1786e7b73b57cd140f6013c072c70dbdffd9e9bc695f8"
+  },
+  {
+    "file": "figma.ico",
+    "source": "https://static.figma.com/app/icon/1/favicon.ico",
+    "label": "Figma",
+    "sha256": "08ca858f2be360da7c69e39475dfe336aa605034e36b0943a044f2fb2992cc15"
+  },
+  {
+    "file": "salesforce.ico",
+    "source": "https://www.salesforce.com/favicon.ico",
+    "label": "Salesforce",
+    "sha256": "92842fc6c2f66b46f69458c14621fc2eca5d6c02d7937f9124fe8a3a9a55bc91"
+  },
+  {
+    "file": "microsoft.ico",
+    "source": "https://www.microsoft.com/favicon.ico",
+    "label": "Microsoft platform",
+    "sha256": "90cdaf487716184e4034000935c605d1633926d348116d198f355a98b8c6cd21"
+  },
+  {
+    "file": "google.ico",
+    "source": "https://www.google.com/favicon.ico",
+    "label": "Google platform",
+    "sha256": "6da5620880159634213e197fafca1dde0272153be3e4590818533fab8d040770"
+  }
+]

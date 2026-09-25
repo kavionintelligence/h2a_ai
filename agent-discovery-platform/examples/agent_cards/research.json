@@ -1,0 +1,40 @@
+{
+  "protocolVersion": "0.3.0",
+  "name": "Research Agent",
+  "description": "Synthetic offline agent; no real analysis is performed.",
+  "url": "http://127.0.0.1:8766/research",
+  "version": "1.0.0",
+  "provider": {
+    "organization": "Synthetic Demo",
+    "url": "https://example.invalid"
+  },
+  "preferredTransport": "JSONRPC",
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false
+  },
+  "defaultInputModes": [
+    "text/plain"
+  ],
+  "defaultOutputModes": [
+    "text/plain"
+  ],
+  "skills": [
+    {
+      "id": "literature_search",
+      "name": "literature_search",
+      "description": "Synthetic literature_search",
+      "tags": [
+        "literature_search"
+      ]
+    },
+    {
+      "id": "paper_analysis",
+      "name": "paper_analysis",
+      "description": "Synthetic paper_analysis",
+      "tags": [
+        "paper_analysis"
+      ]
+    }
+  ]
+}

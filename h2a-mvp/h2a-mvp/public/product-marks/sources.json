@@ -1,0 +1,26 @@
+[
+  {
+    "file": "claude.png",
+    "source": "https://assets.claude.com/95a868946ac8a31e5ff832e2899f294aa368b836.png?w=128&h=128",
+    "referenced_by": "https://claude.com",
+    "sha256": "4004381309500f25e49a1ae639912ce307ea81da74cc383954a1ac8b9d343fe6"
+  },
+  {
+    "file": "gemini.png",
+    "source": "https://www.gstatic.com/lamda/images/gemini_sparkle_4g_512_lt_f94943af3be039176192d.png",
+    "referenced_by": "https://gemini.google.com",
+    "sha256": "5e7cfecaa53f4f65a313fe89b0f389548126544a78fad8489510c70ae641a4a1"
+  },
+  {
+    "file": "antigravity.png",
+    "source": "https://antigravity.google/assets/image/antigravity-logo.png",
+    "referenced_by": "https://antigravity.google",
+    "sha256": "8f0b95d2d21dbf930b4d100e2fdc4505673e900a731aa56ea633a4b59c312799"
+  },
+  {
+    "file": "openai.svg",
+    "source": "Official OpenAI Codex extension 26.818.41509, resources/blossom-black.svg",
+    "referenced_by": "https://marketplace.visualstudio.com/items?itemName=OpenAI.chatgpt",
+    "sha256": "8652777b55544c572ba445dd230a90c2e248611e92eaa77de5805e8d0561fc30"
+  }
+]

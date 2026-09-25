@@ -1,0 +1,27 @@
+{
+  "name": "byosync",
+  "version": "1.1.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22.12" },
+  "scripts": {
+    "setup": "node scripts/setup.mjs",
+    "dev": "node scripts/start-byosync.mjs",
+    "start": "node scripts/start-byosync.mjs",
+    "doctor": "node scripts/doctor.mjs",
+    "build": "node scripts/build-byosync.mjs",
+    "install:hosted": "node scripts/install-hosted.mjs",
+    "build:hosted": "node scripts/build-hosted.mjs",
+    "test": "node --test --test-concurrency=1 tests/governance-lifecycle.test.mjs",
+    "test:portable": "node --test --test-concurrency=1 tests/portable-access.test.mjs",
+    "test:rooms": "node h2a-mvp/h2a-mvp/node_modules/vitest/vitest.mjs run tests/room-runtime.test.ts tests/repository-connectors.test.ts --root h2a-mvp/h2a-mvp --maxWorkers=1",
+    "audit:sources": "node scripts/audit-source-repositories.mjs",
+    "test:browser": "node --test --test-concurrency=1 tests/ciso-ui-browser.test.mjs",
+    "test:browser:legacy": "node --test --test-concurrency=1 tests/governance-browser.test.mjs",
+    "test:guards": "node h2a-mvp/h2a-mvp/node_modules/vitest/vitest.mjs run tests/governance-service.test.ts --root h2a-mvp/h2a-mvp --maxWorkers=1",
+    "test:existing": "node scripts/test-existing.mjs",
+    "test:h2a:full": "node scripts/test-h2a-full.mjs",
+    "test:electron:pipe": "node scripts/test-h2a-full.mjs tests/control-plane-diagnostics.test.ts tests/control-plane-refresh-persistence.test.ts tests/human-escalation-refresh-persistence.test.ts tests/process-transport-lifecycle.test.ts tests/process-supervisor-phase16.test.ts tests/electron-main-diagnostics.test.ts",
+    "typecheck": "node h2a-mvp/h2a-mvp/node_modules/typescript/bin/tsc --noEmit -p tsconfig.governance.json"
+  }
+}

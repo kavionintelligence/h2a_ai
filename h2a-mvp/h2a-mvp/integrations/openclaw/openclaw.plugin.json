@@ -1,0 +1,15 @@
+{
+  "id": "h2a-authority",
+  "name": "H2A Authority Policy",
+  "version": "0.1.0",
+  "description": "Routes OpenClaw run and tool lifecycle decisions through a loopback H2A policy endpoint.",
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["endpoint"],
+    "properties": {
+      "endpoint": { "type": "string", "format": "uri", "description": "Loopback H2A policy endpoint." },
+      "bearerToken": { "type": "string", "description": "Optional plugin-managed bearer token." }
+    }
+  }
+}

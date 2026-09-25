@@ -1,0 +1,17 @@
+flowchart TB
+  Platform["Agents, APIs, MCP servers, workflows, infrastructure"]
+  Platform --> Declared["Declared: A2A, MCP, manual registration"]
+  Platform --> Control["Control plane: Kubernetes, Docker, API inventories"]
+  Platform --> Runtime["Runtime: normalized events, OTLP JSON"]
+  Declared --> Candidate["Candidate and evidence contracts"]
+  Control --> Candidate
+  Runtime --> Candidate
+  Candidate --> Reasoning["Fingerprint → classify → resolve identity → infer capabilities"]
+  Reasoning --> Trust["Operator trust and endpoint policy"]
+  Trust --> Store[("SQL registry, observations, graph, audit")]
+  Store --> Search["Search and explainable matching"]
+  Store --> Governance["Shadow review and dashboard"]
+  Search --> Router["A2A / HTTP / MCP / local router"]
+  Router --> Platform
+  Store --> Monitoring["Health scans and evidence freshness"]
+  Monitoring --> Store

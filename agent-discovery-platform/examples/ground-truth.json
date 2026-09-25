@@ -1,0 +1,106 @@
+[
+  {
+    "key": "security",
+    "endpoint": "http://127.0.0.1:8766/security",
+    "agent": true,
+    "shadow": false,
+    "inferred_capabilities": [
+      "code_security",
+      "secret_detection",
+      "security_analysis",
+      "code_search",
+      "repository_analysis"
+    ]
+  },
+  {
+    "key": "research",
+    "endpoint": "http://127.0.0.1:8766/research",
+    "agent": true,
+    "shadow": false,
+    "inferred_capabilities": [
+      "literature_search",
+      "paper_analysis"
+    ]
+  },
+  {
+    "key": "cv",
+    "endpoint": "http://127.0.0.1:8766/cv",
+    "agent": true,
+    "shadow": false,
+    "inferred_capabilities": [
+      "image_classification",
+      "object_detection"
+    ]
+  },
+  {
+    "key": "coordinator",
+    "endpoint": "http://127.0.0.1:8766/coordinator",
+    "agent": true,
+    "shadow": false,
+    "inferred_capabilities": [
+      "code_security",
+      "secret_detection",
+      "security_analysis",
+      "code_search",
+      "repository_analysis"
+    ]
+  },
+  {
+    "key": "child",
+    "endpoint": "http://127.0.0.1:8766/child",
+    "agent": true,
+    "shadow": true,
+    "inferred_capabilities": [
+      "code_security",
+      "secret_detection",
+      "security_analysis",
+      "code_search",
+      "repository_analysis"
+    ]
+  },
+  {
+    "key": "shadow",
+    "endpoint": "http://127.0.0.1:8766/shadow",
+    "agent": true,
+    "shadow": true,
+    "inferred_capabilities": [
+      "code_security",
+      "secret_detection",
+      "security_analysis",
+      "code_search",
+      "repository_analysis"
+    ]
+  },
+  {
+    "key": "normal-api",
+    "endpoint": "http://127.0.0.1:8766/normal-api",
+    "agent": false,
+    "shadow": false,
+    "inferred_capabilities": []
+  },
+  {
+    "key": "mcp",
+    "endpoint": "http://127.0.0.1:8766/mcp",
+    "agent": false,
+    "shadow": false,
+    "inferred_capabilities": [
+      "code_security",
+      "secret_detection",
+      "security_analysis"
+    ]
+  },
+  {
+    "key": "llm-wrapper",
+    "endpoint": "http://127.0.0.1:8766/llm-wrapper",
+    "agent": false,
+    "shadow": false,
+    "inferred_capabilities": []
+  },
+  {
+    "key": "workflow",
+    "endpoint": "http://127.0.0.1:8766/workflow",
+    "agent": false,
+    "shadow": false,
+    "inferred_capabilities": []
+  }
+]
