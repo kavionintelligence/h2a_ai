@@ -124,6 +124,22 @@ See [source integration](docs/SOURCE_INTEGRATION.md) for the exact Census and H2
 
 ## Build and verify
 
+### Simulator analytics and privacy
+
+The overview's **Reviewed memory growth**, **Tool calls per completed task**, and **Daily work volume** cards open dedicated, bookmarkable analysis pages (`?analysis=memory`, `calls`, or `volume`). Each includes date/team filters, exact daily values and links to source records. Historical charts remain separate from current playback. Tool-call reductions are modeled assumptions, not measured API savings.
+
+The hospital simulator masks personal names, agent/device identities, authority references and record contents as `********`. Use the adjacent **Show** control in a field or record inspector; **Hide** closes it immediately. Reveals expire after 60 seconds and reset on navigation, filtering or leaving the browser tab. **Hide all** clears every reveal. Aggregate counts, department/product names, dates and status remain visible. Exports omit private strings and dynamic identity keys even after a field has been revealed.
+
+**This is presentation privacy, not an access-control boundary.** The simulator source data remains in the browser and can be inspected through developer tools or browser storage. It does not prove backend denial of access to CISOs, encryption, audit of authorized reveals, or enterprise authentication. This change applies to the simulator, not the separate local backend workspace. Do not load real personal data or credentials into the simulator.
+
+Focused hosted checks (build first):
+
+```powershell
+npm.cmd run build:hosted
+node --test --test-concurrency=1 tests/access-portal-browser.test.mjs tests/privacy-analytics-browser.test.mjs
+node --test tests/enterprise-simulation-browser.test.mjs
+```
+
 ```powershell
 npm.cmd run build
 npm.cmd run typecheck

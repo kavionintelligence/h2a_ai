@@ -9,6 +9,39 @@ import { randomUUID } from 'node:crypto';
 import { buildDemo } from '../scripts/build-demo.mjs';
 import { root, h2a } from '../scripts/demo-runtime.mjs';
 
+async function revealField(scope,label){
+  const field=scope.locator(`[data-private-field="${label}"]`).first();
+  assert.equal(await field.getAttribute('data-revealed'),'false',`${label} begins masked`);
+  assert.equal(await field.locator('.privacy-mask').innerText(),'********');
+  await field.getByRole('button',{name:`Show ${label}`,exact:true}).click();
+  await field.locator('.privacy-value').waitFor();
+  assert.equal(await field.getAttribute('data-revealed'),'true');
+  return field.locator('.privacy-value').innerText();
+}
+
+async function revealBlock(scope,label){
+  const block=scope.locator(`[data-private-block="${label}"]`).first();
+  assert.equal(await block.getAttribute('data-revealed'),'false',`${label} begins masked`);
+  await block.getByRole('button',{name:`Show ${label}`,exact:true}).click();
+  await block.getByRole('button',{name:`Hide ${label}`,exact:true}).waitFor();
+  assert.equal(await block.getAttribute('data-revealed'),'true');
+  return block;
+}
+
+function assertRedactedTree(value,path='data'){
+  if(typeof value==='string')assert.equal(value,'********',`${path} withholds source strings`);
+  else if(Array.isArray(value))value.forEach((item,index)=>assertRedactedTree(item,`${path}[${index}]`));
+  else if(value&&typeof value==='object')Object.entries(value).forEach(([key,item])=>assertRedactedTree(item,`${path}.${key}`));
+}
+
+async function readRedactedDownload(download){
+  const value=JSON.parse(await readFile(await download.path(),'utf8'));
+  assert.equal(value.privacy,'REDACTED — string fields withheld');
+  assert.ok(value.data&&typeof value.data==='object');
+  assertRedactedTree(value.data);
+  return value.data;
+}
+
 test('enterprise scenario is populated, interactive, pausable, persistent and isolated', {timeout:180000}, async t=>{
   await buildDemo();
   const web=resolve(h2a,'apps/web/dist');const apiRequests=[];
@@ -40,8 +73,12 @@ test('enterprise scenario is populated, interactive, pausable, persistent and is
   await estate.getByRole('heading',{name:'48 accountable agent identities'}).waitFor();
   assert.match(await estate.locator('.ae-chart-key').innerText(),/30[\s\S]*18/);
   assert.match(await estate.locator('.ae-status-segments').innerText(),/1[\s\S]*Approved[\s\S]*1[\s\S]*Waiting for approval[\s\S]*2[\s\S]*Blocked[\s\S]*2[\s\S]*Unverified/);
-  await estate.locator('[data-agent-id="AG-0-0"] .ae-card-title').click();
+  await estate.locator('[data-agent-id="AG-0-0"]').getByRole('button',{name:'Inspect agent',exact:true}).click();
+  await page.getByRole('dialog').getByRole('heading',{name:'Agent details',exact:true}).waitFor();
   const agentDetails=page.getByTestId('agent-security-details');
+  assert.doesNotMatch(await agentDetails.innerText(),/Maya Rao/);
+  assert.equal(await revealField(agentDetails,'Legal hardware owner'),'Joon’s Hospital');
+  assert.equal(await revealField(agentDetails,'Device custodian'),'Maya Rao');
   assert.match(await agentDetails.innerText(),/Legal owner[\s\S]*Joon’s Hospital[\s\S]*Assigned to \/ custodian[\s\S]*Maya Rao/);
   assert.match(await agentDetails.innerText(),/Receiving-team human approvals:[\s\S]*0[\s\S]*recorded/);
   await agentDetails.getByRole('button',{name:/Mandate checks/}).click();
@@ -53,8 +90,11 @@ test('enterprise scenario is populated, interactive, pausable, persistent and is
   await estate.getByRole('tab',{name:/Devices/}).click();await page.getByLabel('Device ownership',{exact:true}).selectOption('BYOD');
   assert.equal(await estate.locator('[data-device-id]').count(),6);
   await estate.locator('[data-device-id="DEVICE-H-0-5"]').getByRole('button',{name:'Inspect device',exact:true}).click();
+  assert.equal(await revealField(page.getByTestId('estate-device-detail'),'Legal hardware owner'),'Om Prakash');
   assert.match(await page.getByTestId('estate-device-detail').innerText(),/Legal hardware owner[\s\S]*Om Prakash[\s\S]*Work profile|Work profile[\s\S]*Legal hardware owner[\s\S]*Om Prakash/i);
   await page.getByTestId('estate-device-detail').locator('.ae-detail-person').click();
+  await page.getByRole('dialog').getByRole('heading',{name:'Person details',exact:true}).waitFor();
+  assert.equal(await revealField(page.getByTestId('person-device-details'),'Device name'),'Om’s personal laptop');
   assert.match(await page.getByTestId('person-device-details').innerText(),/Om’s personal laptop[\s\S]*BYOD/);
   await page.getByTestId('person-device-details').getByText('Visibility and device-control limits',{exact:true}).click();
   assert.match(await page.getByTestId('person-device-details').innerText(),/private apps and files are not inventoried/);
@@ -65,6 +105,8 @@ test('enterprise scenario is populated, interactive, pausable, persistent and is
   await estate.getByRole('tab',{name:/Discovered software/}).click();
   await page.getByLabel('Software authorization').selectOption('Blocked');assert.equal(await estate.locator('[data-observation-id]').count(),2);
   await estate.locator('[data-observation-id="DISC-03"]').getByRole('button',{name:'Inspect evidence'}).click();
+  await page.getByRole('dialog').getByRole('heading',{name:'Discovery details',exact:true}).waitFor();
+  assert.equal(await revealField(page.getByTestId('discovery-device-details'),'Device name'),'Madhav’s personal laptop');
   assert.match(await page.getByTestId('discovery-device-details').innerText(),/Blocked[\s\S]*Madhav’s personal laptop[\s\S]*BYOD/);await page.keyboard.press('Escape');
   await estate.getByRole('tab',{name:/Tool access/}).click();
   await page.waitForFunction(()=>[...document.querySelectorAll('.ae-tool-card .estate-tool-mark img')].length===6&&[...document.querySelectorAll('.ae-tool-card .estate-tool-mark img')].every(i=>i.complete&&i.naturalWidth>0));
@@ -73,7 +115,10 @@ test('enterprise scenario is populated, interactive, pausable, persistent and is
   await page.getByTestId('estate-tool-detail').waitFor();
   assert.match(await page.getByTestId('estate-tool-detail').innerText(),/repository.read[\s\S]*OBSERVED/);
   await page.getByTestId('estate-tool-detail').getByRole('button',{name:'Open latest task'}).first().click();
-  await page.getByRole('dialog').getByRole('heading',{name:'Identity travels with the work'}).waitFor();await page.keyboard.press('Escape');
+  await page.getByRole('dialog').getByRole('heading',{name:'Task details',exact:true}).waitFor();
+  await page.getByRole('dialog').getByRole('heading',{name:'Identity travels with the work',exact:true}).waitFor();
+  assert.match(await revealField(page.getByRole('dialog'),'Record ID'),/^(HIST|LIVE)-/);
+  await page.keyboard.press('Escape');
   // The default landing page is the hospital simulator; every team has a usable nested map.
   await page.getByRole('button',{name:'Overview',exact:true}).click();
   assert.match(await page.locator('.hospital-kpis').innerText(),/42[\s\S]*48[\s\S]*18/);
@@ -91,6 +136,11 @@ test('enterprise scenario is populated, interactive, pausable, persistent and is
     await edge.focus();await map.locator('.collab-tooltip').waitFor();
     await edge.press('Enter');
     assert.match(await map.getByTestId('connection-detail').innerText(),/Permitted scope[\s\S]*Mandate[\s\S]*Passport[\s\S]*Accountable human[\s\S]*Exact task[\s\S]*Data boundary/i);
+    if(team==='Technology'){
+      assert.match(await revealField(map.getByTestId('connection-detail'),'mandate identifier'),/^SIM-MND-/);
+      const narrative=await revealBlock(map.getByTestId('connection-detail'),'Connection narrative');
+      assert.ok((await narrative.innerText()).length>80,'Connection narrative is available through an explicit reveal');
+    }
     if(team==='Technology')await page.screenshot({path:join(artifacts,'hospital-room-trace.png'),fullPage:true});
     await map.getByRole('button',{name:'Back in collaboration map'}).click();
     assert.equal(await map.getAttribute('data-level'),'team');
@@ -98,11 +148,17 @@ test('enterprise scenario is populated, interactive, pausable, persistent and is
     assert.equal(await map.getAttribute('data-level'),'company');
   }
   await page.locator('.hospital-deliverables button').first().click();
+  await page.getByRole('dialog').getByRole('heading',{name:'Task details',exact:true}).waitFor();
   await page.getByRole('heading',{name:'Completed task deliverable',exact:true}).waitFor();
+  assert.equal(await page.getByRole('dialog').locator('.hospital-output').count(),0,'Completed output is not rendered before reveal');
+  await revealBlock(page.getByRole('dialog'),'Completed deliverable');
   assert.ok(await page.getByRole('dialog').locator('.hospital-output table').count()>0,'Deliverable accountability renders as a readable table');
-  const taskOutput=page.waitForEvent('download');await page.getByRole('button',{name:'Download deliverable',exact:true}).click();
-  const taskDownload=await taskOutput;assert.match(taskDownload.suggestedFilename(),/\.md$/);
-  assert.match(await readFile(await taskDownload.path(),'utf8'),/synthetic operational example/);
+  assert.match(await page.getByRole('dialog').locator('.hospital-output').innerText(),/synthetic operational example/,'Revealed deliverable retains its provenance');
+  const taskOutput=page.waitForEvent('download');await page.getByRole('button',{name:'Download redacted deliverable',exact:true}).click();
+  const taskDownload=await taskOutput;assert.equal(taskDownload.suggestedFilename(),'ByoSync-redacted-deliverable.json');
+  const taskExport=await readRedactedDownload(taskDownload);
+  assert.ok(taskExport.output.sections.length>0,'Redaction retains the structured deliverable shape');
+  assert.equal(taskExport.task.baseline,8,'Redaction preserves numeric measurements');
   await page.screenshot({path:join(artifacts,'hospital-completed-output.png'),fullPage:true});
   await page.keyboard.press('Escape');
   await page.getByRole('button',{name:'Company brain',exact:true}).click();
@@ -119,9 +175,18 @@ test('enterprise scenario is populated, interactive, pausable, persistent and is
     await record.click();
     assert.match(await brain.getByTestId('brain-knowledge-details').innerText(),/Reviewed by[\s\S]*Download deliverable/i);
     if(team==='Technology'){
-      const brainOutput=page.waitForEvent('download');await brain.getByRole('button',{name:'Download deliverable',exact:true}).click();assert.match((await brainOutput).suggestedFilename(),/\.md$/);
+      const knowledge=brain.getByTestId('brain-knowledge-details');
+      assert.match(await revealField(knowledge,'knowledge identifier'),/^MEM-/);
+      const reviewedContext=await revealBlock(knowledge,'Reviewed context');
+      assert.match(await reviewedContext.innerText(),/Reuse only within/);
+      const brainOutput=page.waitForEvent('download');await brain.getByRole('button',{name:'Download deliverable',exact:true}).click();
+      const brainDownload=await brainOutput;assert.equal(brainDownload.suggestedFilename(),'redacted-deliverable.md');
+      const brainText=await readFile(await brainDownload.path(),'utf8');
+      assert.match(brainText,/Title: \*{8}[\s\S]*Task identifier: \*{8}[\s\S]*Accountable human: \*{8}[\s\S]*Agent: \*{8}[\s\S]*Task content: \*{8}/);
+      assert.doesNotMatch(brainText,/HIST-\d+|LIVE-\d+|MEM-|SIM-PASS|SIM-MND|Maya Rao|Priya Desai/);
       await brain.getByRole('button',{name:'View complete deliverable',exact:true}).click();
       await page.getByRole('dialog').getByRole('heading',{name:'Completed task deliverable',exact:true}).waitFor();
+      assert.equal(await page.getByRole('dialog').locator('.hospital-output').count(),0,'Navigation remasks the completed output');
       await page.keyboard.press('Escape');
       await page.evaluate(()=>{document.activeElement?.blur();window.scrollTo(0,0);});
       await page.screenshot({path:join(artifacts,'hospital-brain-record.png'),fullPage:true});
@@ -132,14 +197,28 @@ test('enterprise scenario is populated, interactive, pausable, persistent and is
   }
   await page.getByRole('button',{name:'Security posture',exact:true}).click();
   await page.getByRole('heading',{name:'Know the exposure. Know the limits. Decide.',exact:true}).waitFor();
+  const selectConcern=async title=>{
+    const concerns=page.locator('.sp-concerns > button');
+    for(let index=0;index<await concerns.count();index++){
+      await concerns.nth(index).click();
+      const revealed=await revealField(page.locator('.sp-detail'),'Concern title');
+      if(title.test(revealed))return;
+    }
+    assert.fail(`No concern matched ${title} after explicitly revealing each title`);
+  };
   await page.locator('.sp-filters').getByRole('button',{name:'Unknown',exact:true}).click();
-  await page.locator('.sp-concerns').getByRole('button',{name:/Modeled inventory is not measured device coverage/}).click();
+  await selectConcern(/Modeled inventory is not measured device coverage/);
   assert.match(await page.locator('.sp-detail').innerText(),/not measured device coverage/);
   await page.getByText('Data protection',{exact:true}).click();
   assert.match(await page.locator('.sp-gate[open]').innerText(),/encryption\/key ownership/);
-  const securityExport=page.waitForEvent('download');await page.getByRole('button',{name:'Export security brief',exact:true}).click();assert.match((await securityExport).suggestedFilename(),/SYNTHETIC-security-brief/);
+  const securityExport=page.waitForEvent('download');await page.getByRole('button',{name:'Export redacted brief',exact:true}).click();
+  const securityDownload=await securityExport;assert.match(securityDownload.suggestedFilename(),/SYNTHETIC-security-brief/);
+  const securityData=JSON.parse(await readFile(await securityDownload.path(),'utf8'));
+  assertRedactedTree(securityData.posture,'posture');
+  assert.equal(securityData.posture.registered,48);
+  assert.equal(securityData.classification,'Synthetic scenario');
   await page.locator('.sp-filters').getByRole('button',{name:'Attention',exact:true}).click();
-  await page.locator('.sp-concerns').getByRole('button',{name:/Use blocked · Gemini/}).click();
+  await selectConcern(/Use blocked · Gemini/);
   await page.getByRole('button',{name:'Review restriction and enforcement evidence',exact:true}).click();
   await page.getByRole('dialog').waitFor();assert.match(await page.getByRole('dialog').innerText(),/Fictional discovery fixture/);await page.keyboard.press('Escape');
   await page.getByRole('button',{name:'Task pipeline',exact:true}).click();
@@ -152,6 +231,8 @@ test('enterprise scenario is populated, interactive, pausable, persistent and is
   await page.getByRole('button',{name:'Review exact request',exact:true}).first().click();
   const dialog=page.getByRole('dialog');const approve=dialog.getByRole('button',{name:/Approve exact action|Publish reviewed memory/});
   assert.equal(await approve.isDisabled(),true);
+  await revealBlock(dialog,'Exact request scope');
+  assert.ok((await revealField(dialog,'Request reviewer')).length>0,'Reviewer can inspect scope and accountable identity before deciding');
   await dialog.getByLabel('I reviewed this scenario request, scope and accountable owner.',{exact:true}).check();
   await approve.click();assert.ok((await read()).events.some(e=>e.origin==='Presenter decision'));
   await page.keyboard.press('Escape');
@@ -162,7 +243,13 @@ test('enterprise scenario is populated, interactive, pausable, persistent and is
   await page.getByRole('button',{name:'Pause activity',exact:true}).click();
   const paused=(await read()).tick;await page.waitForTimeout(900);assert.equal((await read()).tick,paused);
   await page.reload();assert.equal((await read()).tick,paused);await page.getByRole('button',{name:'Play activity',exact:true}).waitFor();
-  const savedDownload=page.waitForEvent('download');await page.getByRole('button',{name:'Export',exact:true}).click();assert.match((await savedDownload).suggestedFilename(),/SYNTHETIC/);
+  const savedDownload=page.waitForEvent('download');await page.getByRole('button',{name:'Redacted export',exact:true}).click();
+  const sessionDownload=await savedDownload;assert.match(sessionDownload.suggestedFilename(),/SYNTHETIC/);
+  const sessionData=await readRedactedDownload(sessionDownload);
+  assert.equal(sessionData.company_population,42);
+  assert.equal(sessionData.scenario.people.length,42);
+  assert.equal(sessionData.scenario.agents.length,48);
+  assert.equal(sessionData.playback.tick,paused);
   await page.getByRole('button',{name:'AI estate',exact:true}).click();await page.getByLabel('Department filter').selectOption('Sales');
   assert.equal(await page.locator('[data-agent-id]').count(),8);await page.getByLabel('Agent type').selectOption('Personal');assert.equal(await page.locator('[data-agent-id]').count(),3);
   await page.getByLabel('Department filter').selectOption('All');
@@ -181,7 +268,7 @@ test('enterprise scenario is populated, interactive, pausable, persistent and is
   }
   await page.evaluate(()=>window.scrollTo(0,0));await page.screenshot({path:join(artifacts,'estate-mobile.png'),fullPage:false});
   await estate.locator('[data-estate-tab="Agents"]').click();
-  await estate.locator('[data-agent-id="AG-0-0"] .ae-card-title').click();
+  await estate.locator('[data-agent-id="AG-0-0"]').getByRole('button',{name:'Inspect agent',exact:true}).click();
   await page.getByTestId('agent-security-details').waitFor();
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true,'Agent device inspector: mobile width');
   await page.getByRole('button',{name:'Close simulation inspector',exact:true}).click();

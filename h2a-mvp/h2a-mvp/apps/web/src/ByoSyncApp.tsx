@@ -14,6 +14,7 @@ import { EnterpriseSimulation } from './enterprise-simulation/EnterpriseSimulati
 import { SecurityEntry, SecurityPosture } from './security-posture/SecurityPosture';
 import { authorityIssue, workspacePosture } from './security-posture/model';
 import { AccessPortal } from './access/AccessPortal';
+import { PrivacyProvider } from './privacy/Privacy';
 import { BrandMark } from './BrandMark';
 
 type Page = 'overview' | 'security' | 'estate' | 'discovery' | 'decisions' | 'operations' | 'assurance' | 'trace' | 'administration';
@@ -65,7 +66,7 @@ export function ByoSyncApp() {
   const hosted = (import.meta as ImportMeta & { env: Record<string, string | undefined> }).env.VITE_BYOSYNC_HOSTED_SIMULATOR === 'true';
   const [simulation, setSimulation] = useState(() => hosted || new URLSearchParams(window.location.search).get('mode') !== 'workspace');
   const switchSimulation = (enabled: boolean) => { const next = hosted || enabled; const url = new URL(window.location.href); url.searchParams.set('mode', next ? 'enterprise' : 'workspace'); window.history.replaceState(null, '', url); setSimulation(next); };
-  if (simulation) return <AccessPortal><EnterpriseSimulation onExit={() => switchSimulation(false)} /></AccessPortal>;
+  if (simulation) return <PrivacyProvider><AccessPortal><EnterpriseSimulation onExit={() => switchSimulation(false)} /></AccessPortal></PrivacyProvider>;
   return <RealWorkspace onSimulation={() => switchSimulation(true)} />;
 }
 

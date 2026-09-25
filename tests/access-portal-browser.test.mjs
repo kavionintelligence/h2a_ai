@@ -69,7 +69,16 @@ test('hosted login, hospital selection, mobile, logout and local-workspace isola
   assert.equal(await page.getByLabel('Password',{exact:true}).getAttribute('type'),'text');
   await page.getByRole('button',{name:'Hide password',exact:true}).click();
   await page.getByRole('button',{name:'Sign in',exact:true}).click();
-  await page.getByRole('heading',{name:'Welcome to the dashboard, Varun.'}).waitFor();
+  await page.getByRole('heading',{name:'Welcome to the dashboard.',exact:true}).waitFor();
+  const welcomeName=page.locator('[data-private-field="Welcome name"]');
+  assert.equal(await welcomeName.getAttribute('data-revealed'),'false');
+  assert.equal(await welcomeName.locator('.privacy-mask').innerText(),'********');
+  assert.doesNotMatch(await page.locator('.access-welcome').innerText(),/Varun/);
+  await welcomeName.getByRole('button',{name:'Show Welcome name',exact:true}).click();
+  await welcomeName.locator('.privacy-value').waitFor();
+  assert.equal(await welcomeName.locator('.privacy-value').innerText(),'Varun');
+  await welcomeName.getByRole('button',{name:'Hide Welcome name',exact:true}).click();
+  assert.equal(await welcomeName.getAttribute('data-revealed'),'false');
   await assertBrand('byosync');
   assert.equal(await page.getByTestId('tenant-sarvodaya').isDisabled(),true);
   assert.equal(await page.getByTestId('tenant-deplomact').isDisabled(),true);
@@ -78,6 +87,7 @@ test('hosted login, hospital selection, mobile, logout and local-workspace isola
   await page.getByTestId('tenant-joon').click();
   await page.getByRole('heading',{name:'Your hospital. Connected and accountable.'}).waitFor();
   await assertBrand('byosync');
+  assert.equal(await page.locator('[data-private-field="Account name"]').getAttribute('data-revealed'),'false','Account identity remains private after opening the hospital');
   const stored=await page.evaluate(()=>JSON.parse(sessionStorage.getItem('byosync.presentation-access.v1')));
   assert.deepEqual(stored,{signedIn:true,tenant:'joon'});
   assert.equal(await page.evaluate(()=>JSON.stringify({...sessionStorage}).includes('ByoSync@123')),false);
