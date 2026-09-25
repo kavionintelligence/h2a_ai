@@ -14,6 +14,7 @@ import { EnterpriseSimulation } from './enterprise-simulation/EnterpriseSimulati
 import { SecurityEntry, SecurityPosture } from './security-posture/SecurityPosture';
 import { authorityIssue, workspacePosture } from './security-posture/model';
 import { AccessPortal } from './access/AccessPortal';
+import { BrandMark } from './BrandMark';
 
 type Page = 'overview' | 'security' | 'estate' | 'discovery' | 'decisions' | 'operations' | 'assurance' | 'trace' | 'administration';
 type Selection = { kind: 'agent' | 'census' | 'approval' | 'action' | 'finding' | 'event' | 'room' | 'memory' | 'connection' | 'source-report' | 'platform-component'; id: string } | null;
@@ -140,7 +141,7 @@ function RealWorkspace({ onSimulation }: { onSimulation: () => void }) {
   return <div className="byo-app">
     <a className="skip-link" href="#workspace-content">Skip to workspace</a>
     <aside className={`byo-nav ${menuOpen ? 'open' : ''}`}>
-      <button className="brand" onClick={() => { setPage('overview'); setSelection(null); }} aria-label="ByoSync home"><span className="brand-mark"><Network /></span><span><strong>ByoSync</strong><small>AI authority</small></span></button>
+      <button className="brand" onClick={() => { setPage('overview'); setSelection(null); }} aria-label="ByoSync home"><BrandMark/><span><strong>ByoSync</strong><small>AI authority</small></span></button>
       <nav aria-label="Primary navigation">
         {nav.map(item => <button key={item.id} aria-current={page === item.id ? 'page' : undefined} aria-label={item.label} title={item.label} className={page === item.id ? 'active' : ''} onClick={() => { setPage(item.id); setSelection(null); setMenuOpen(false); }}><item.icon /><span>{item.label}</span>{item.id === 'decisions' && pendingCount ? <b>{pendingCount}</b> : null}</button>)}
       </nav>

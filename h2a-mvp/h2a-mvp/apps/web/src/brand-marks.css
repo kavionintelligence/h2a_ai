@@ -1,0 +1,20 @@
+/* Framing removes only the artwork's generous outer space; files stay intact. */
+.brand-art { display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; flex:0 0 auto; overflow:hidden; vertical-align:middle; }
+.brand-art > img { display:block; width:100%; height:100%; max-width:none; object-fit:contain; flex:none; }
+.brand-art-byosync > img { transform:scale(1.5); }
+.brand-art-h2a { border-radius:9px; background:#073799; }
+.brand-art-h2a > img { transform:scale(1.65); }
+.access-portal .access-brand .brand-art { width:42px; height:46px; }
+.access-portal .access-login-story .access-brand .brand-art { width:72px; height:78px; }
+.access-portal .access-story-footer .brand-art { width:58px; height:58px; }
+.access-story-footer strong { display:block; color:#28496d; font-size:13px; font-weight:600; }
+.access-login-main .access-h2a-signature { display:flex; align-items:center; gap:10px; margin-top:20px; color:#526b89; font-size:12px; }
+.access-h2a-signature .brand-art { width:44px; height:44px; }
+.access-h2a-signature strong { display:block; color:#28496d; font-weight:600; }
+.sim-sidebar .sim-brand .brand-art { width:32px; height:38px; }
+.brand .brand-art { width:38px; height:40px; }
+.h2a-identity-heading { display:flex; align-items:center; gap:12px; margin:0 0 14px; color:#143656; }
+.h2a-identity-heading .brand-art { width:48px; height:48px; }
+.h2a-identity-heading strong { display:block; font-size:15px; }
+.h2a-identity-heading small { display:block; margin-top:3px; color:#537092; font-size:12px; }
+@media(max-width:760px){.access-portal .access-login-mobile-brand .brand-art { width:46px; height:48px; }}

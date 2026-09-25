@@ -13,6 +13,7 @@ test('hosted login, hospital selection, mobile, logout and local-workspace isola
   const web=resolve(root,'hosted-dist');
   assert.ok(existsSync(join(web,'index.html')),'Build hosted-dist first');
   const config=JSON.parse(await readFile(join(root,'vercel.json'),'utf8'));
+  assert.equal(config.rewrites.some(({source})=>new RegExp(`^${source}$`).test('/brand-marks/does-not-exist.png')),false,'Missing brand assets must not fall back to HTML');
   const headers=Object.fromEntries(config.headers[0].headers.map(({key,value})=>[key,value]));
   const requests=[];
   const server=createServer(async(req,res)=>{
@@ -33,7 +34,29 @@ test('hosted login, hospital selection, mobile, logout and local-workspace isola
   const artifacts=join(root,'.test-artifacts',`portal-${randomUUID()}`);await mkdir(artifacts,{recursive:true});
   t.after(async()=>{await page.screenshot({path:join(artifacts,'final.png'),fullPage:true}).catch(()=>{});await browser.close();await new Promise(r=>server.close(r));});
   const url=`http://127.0.0.1:${server.address().port}/`;
+  const assertBrand=async brand=>{
+    const selector=`img[data-brand="${brand}"]`;
+    await page.locator(selector).first().waitFor({state:'attached'});
+    await page.waitForFunction(selector=>{
+      const images=[...document.querySelectorAll(selector)];
+      return images.length>0&&images.every(image=>image.complete&&image.naturalWidth>0&&image.naturalHeight>0);
+    },selector);
+    for(const image of await page.locator(selector).all()){
+      assert.equal(await image.getAttribute('src'),`/brand-marks/${brand}.png`);
+      assert.ok((await image.getAttribute('alt'))?.trim(),'Brand images need accessible alternative text');
+    }
+  };
+  for(const brand of ['byosync','h2a']){
+    const response=await page.request.get(`${url}brand-marks/${brand}.png`);
+    assert.equal(response.status(),200,`${brand} brand asset is served`);
+    assert.match(response.headers()['content-type']||'',/^image\/png/);
+    assert.deepEqual(await response.body(),await readFile(join(h2a,'public','brand-marks',`${brand}.png`)),`${brand} asset is published without modifying the original copied PNG`);
+  }
+  const missingBrand=await page.request.get(`${url}brand-marks/does-not-exist.png`);
+  assert.equal(missingBrand.status(),404);
+  assert.doesNotMatch(missingBrand.headers()['content-type']||'',/text\/html/);
   await page.goto(url);await page.getByTestId('access-login').waitFor();
+  await assertBrand('byosync');await assertBrand('h2a');
   await page.screenshot({path:join(artifacts,'login-desktop.png'),fullPage:true});
   await page.getByRole('button',{name:'Sign in',exact:true}).click();
   await page.getByText('Enter the presentation login ID.',{exact:true}).waitFor();
@@ -47,12 +70,14 @@ test('hosted login, hospital selection, mobile, logout and local-workspace isola
   await page.getByRole('button',{name:'Hide password',exact:true}).click();
   await page.getByRole('button',{name:'Sign in',exact:true}).click();
   await page.getByRole('heading',{name:'Welcome to the dashboard, Varun.'}).waitFor();
+  await assertBrand('byosync');
   assert.equal(await page.getByTestId('tenant-sarvodaya').isDisabled(),true);
   assert.equal(await page.getByTestId('tenant-deplomact').isDisabled(),true);
   assert.equal(await page.getByTestId('tenant-joon').isEnabled(),true);
   await page.screenshot({path:join(artifacts,'hospitals-desktop.png'),fullPage:true});
   await page.getByTestId('tenant-joon').click();
   await page.getByRole('heading',{name:'Your hospital. Connected and accountable.'}).waitFor();
+  await assertBrand('byosync');
   const stored=await page.evaluate(()=>JSON.parse(sessionStorage.getItem('byosync.presentation-access.v1')));
   assert.deepEqual(stored,{signedIn:true,tenant:'joon'});
   assert.equal(await page.evaluate(()=>JSON.stringify({...sessionStorage}).includes('ByoSync@123')),false);
@@ -71,10 +96,12 @@ test('hosted login, hospital selection, mobile, logout and local-workspace isola
     await page.setViewportSize(viewport);
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true,'Workspace width');
     await page.getByRole('button',{name:'Back to hospitals',exact:true}).click();
+    await assertBrand('byosync');
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true,'Selector width');
     await page.screenshot({path:join(artifacts,`hospitals-${viewport.width}.png`),fullPage:true});
     await page.getByRole('button',{name:'Sign out',exact:true}).click();
     await page.getByTestId('access-login').waitFor();
+    await assertBrand('byosync');await assertBrand('h2a');
     assert.equal(await page.evaluate(()=>sessionStorage.getItem('byosync.presentation-access.v1')),null);
     assert.equal(await page.getByLabel('Password',{exact:true}).inputValue(),'');
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true,'Login width');

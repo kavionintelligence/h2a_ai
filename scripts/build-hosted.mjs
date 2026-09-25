@@ -36,6 +36,18 @@ for (const filename of productMarks) {
   if (!info.isFile() || info.isSymbolicLink()) throw new Error(`Expected a regular reviewed product asset: ${filename}`);
   await copyFile(source, join(markOutput, filename));
 }
+// User-provided brand images are copied byte-for-byte; no resizing, tracing,
+// recoloring, or generated replacements are applied by the hosted build.
+const brandMarks = ['byosync.png', 'h2a.png'];
+const brandSource = join(sourceRoot, 'public', 'brand-marks');
+const brandOutput = join(output, 'brand-marks');
+await mkdir(brandOutput, { recursive: true });
+for (const filename of brandMarks) {
+  const source = join(brandSource, filename);
+  const info = await lstat(source);
+  if (!info.isFile() || info.isSymbolicLink()) throw new Error(`Expected a regular reviewed brand asset: ${filename}`);
+  await copyFile(source, join(brandOutput, filename));
+}
 const manifest = JSON.parse(await readFile(join(projectRoot, 'package.json'), 'utf8'));
 await writeFile(join(output, 'hosting-mode.json'), JSON.stringify({ product: 'ByoSync', version: manifest.version, mode: 'hosted-simulator', data: 'synthetic-browser-local', localWorkspaceAvailable: false, backendDeployed: false }, null, 2) + '\n');
 console.log('Hosted simulator built in hosted-dist. No backend, local workspace data or biometric assets are included.');

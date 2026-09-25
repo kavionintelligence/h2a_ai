@@ -5,7 +5,7 @@
   "buildCommand": "npm run build:hosted",
   "outputDirectory": "hosted-dist",
   "rewrites": [
-    { "source": "/((?!api(?:/|$)|assets(?:/|$)|product-marks(?:/|$)).*)", "destination": "/index.html" }
+    { "source": "/((?!api(?:/|$)|assets(?:/|$)|product-marks(?:/|$)|brand-marks(?:/|$)).*)", "destination": "/index.html" }
   ],
   "headers": [
     {

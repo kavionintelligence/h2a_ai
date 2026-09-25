@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { Activity, ArrowLeft, ArrowRight, Bot, Brain, Building2, Check, ChevronRight, ClipboardCheck, Download, Fingerprint, GitBranch, Layers, Menu, Network, Pause, Play, RotateCcw, Search, ShieldCheck, SkipForward, Users, Workflow, X } from 'lucide-react';
 import { ProductMark } from '../ProductMark';
+import { BrandMark } from '../BrandMark';
 import { DEPARTMENTS, DISCOVERIES, STAGES, SIM_VERSION, classifyObservation, advance, allMemories, allTasks, dailySeries, decide, initialPlayback, isTerminal, makeScenario, metrics, personName, toolFor, type Department, type Playback, type Scenario, type SimAgent, type SimEvent, type SimMemory, type SimTask } from './model';
 import './simulation.css';
 import { CollaborationExplorer } from './CollaborationExplorer';
@@ -46,7 +47,7 @@ export function EnterpriseSimulation({onExit}:{onExit:()=>void}) {
   return <div className="sim-app">
     <a className="skip-link" href="#sim-content">Skip to enterprise workspace</a>
     <aside className={`sim-sidebar ${menu?'open':''}`}>
-      <button className="sim-brand" onClick={()=>go('Overview')}><Network/><strong>ByoSync</strong></button><div className="sim-company"><Building2/><span>{ORGANIZATION_NAME}<small>{DEPARTMENTS.length} teams · {scenario.people.length} people · {scenario.agents.length} agents</small></span></div>
+      <button className="sim-brand" onClick={()=>go('Overview')}><BrandMark/><strong>ByoSync</strong></button><div className="sim-company"><Building2/><span>{ORGANIZATION_NAME}<small>{DEPARTMENTS.length} teams · {scenario.people.length} people · {scenario.agents.length} agents</small></span></div>
       <nav aria-label="Simulation navigation">{pages.map(([name,Icon])=><button key={name} aria-label={name} aria-current={page===name?'page':undefined} onClick={()=>go(name)}><Icon/><span>{name}</span>{name==='Decisions'&&totals.pending>0?<b>{totals.pending}</b>:null}</button>)}</nav>
       <div className="sim-player"><span className="sim-eyebrow">ACTIVITY PLAYBACK</span><button className={`sim-play ${playing?'playing':''}`} onClick={()=>{setPlaying(!playing);setSelection(null);}}>{playing?<Pause/>:<Play/>}{playing?'Pause activity':'Play activity'}</button><div className="sim-player-tools"><button onClick={()=>setPlayback(p=>advance(scenario,p,auto))} disabled={playing} title="Advance one scenario event"><SkipForward/>Step</button><label>Speed<select aria-label="Playback speed" value={speed} onChange={e=>setSpeed(Number(e.target.value))}><option value={2400}>0.5×</option><option value={1200}>1×</option><option value={400}>3×</option></select></label></div><label className="sim-auto"><input type="checkbox" checked={auto} onChange={e=>setAuto(e.target.checked)}/>Scripted human decisions</label><small>{auto?'Scenario reviewers approve at their scheduled step.':'Manual mode: held requests require your decision.'}</small><div className="sim-progress"><span>Batch {playback.cycle} · {playback.queue.filter(t=>isTerminal(t.stage)).length}/20 finished</span><progress max={20} value={playback.queue.filter(t=>isTerminal(t.stage)).length}/></div><button className="sim-link" onClick={()=>{setPlaying(false);setReset(true);}}><RotateCcw/>Reset scenario</button></div>
       <div className="hospital-scope-note">Hospital operations · 30-day activity</div>
