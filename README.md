@@ -15,7 +15,7 @@ Open the application to see the blue-and-white ByoSync sign-in screen. Use the p
 
 The next screen welcomes Varun and offers three workspaces: **Joon’s Hospital — Ready**, **Sarvodaya Hospital — In progress**, and **Deplomact Dental Clinic — Work in progress**. Only Joon’s opens. Use **Back to hospitals** or **Sign out** from the workspace bar. Session state survives refresh in the same tab; passwords are not stored.
 
-Import `varunROS/h2a-ai` into Vercel with **Root Directory `.`**, **Framework Other**, and **Node.js 22.x**. The committed `vercel.json` supplies the installation/build commands and `hosted-dist` output. No API keys are needed. See [Vercel setup and limits](docs/VERCEL_HOSTING.md).
+Import `kavionintelligence/h2a_ai` into Vercel with **Root Directory `.`**, **Framework Other**, and **Node.js 22.x**. The committed `vercel.json` supplies the installation/build commands and `hosted-dist` output. No API keys are needed. See [Vercel setup and limits](docs/VERCEL_HOSTING.md).
 
 The hosted build includes the interactive simulator, not the device collector, local governance server or Claude/Codex CLI. The local `?mode=workspace` route remains available with the local backend; it is disabled in hosted builds.
 
