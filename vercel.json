@@ -4,7 +4,6 @@
   "installCommand": "npm run install:hosted",
   "buildCommand": "npm run build:hosted",
   "outputDirectory": "hosted-dist",
-  "public": false,
   "rewrites": [
     { "source": "/((?!api(?:/|$)|assets(?:/|$)|product-marks(?:/|$)).*)", "destination": "/index.html" }
   ],
